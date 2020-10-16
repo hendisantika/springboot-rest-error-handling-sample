@@ -6,6 +6,7 @@ import com.hendisantika.springbootresterrorhandlingsample.repository.UserReposit
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -82,6 +83,16 @@ public class UserController {
         user.setId(puser.getId());
         userRepository.save(user);
         return ResponseEntity.ok().body(user);
+
+    }
+
+    @DeleteMapping(value = "/users/{id}")
+    ResponseEntity<String> delete(@PathVariable("id") @Min(1) int id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User with ID :" + id + " Not Found!"));
+
+        userRepository.deleteById(user.getId());
+        return ResponseEntity.ok().body("Employee deleted with success!");
 
     }
 }

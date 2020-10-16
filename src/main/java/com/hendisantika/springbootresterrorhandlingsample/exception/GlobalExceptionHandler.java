@@ -129,4 +129,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntityBuilder.build(err);
     }
 
+    // handleResourceNotFoundException : triggers when there is not resource with the specified ID in BDD
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex) {
+
+        List<String> details = new ArrayList<String>();
+        details.add(ex.getMessage());
+
+        ApiError err = new ApiError(LocalDateTime.now(), HttpStatus.NOT_FOUND, "Resource Not Found", details);
+
+        return ResponseEntityBuilder.build(err);
+    }
+
 }

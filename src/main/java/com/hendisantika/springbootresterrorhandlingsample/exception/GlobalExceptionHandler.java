@@ -10,7 +10,9 @@ import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
@@ -98,6 +100,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         details.add(ex.getParameterName() + " parameter is missing");
 
         ApiError err = new ApiError(LocalDateTime.now(), HttpStatus.BAD_REQUEST, "Missing Parameters", details);
+
+        return ResponseEntityBuilder.build(err);
+    }
+
+    // handleMethodArgumentTypeMismatch : triggers when a parameter's type does not match
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    protected ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex,
+                                                                      WebRequest request) {
+        List<String> details = new ArrayList<String>();
+        details.add(ex.getMessage());
+
+        ApiError err = new ApiError(LocalDateTime.now(), HttpStatus.BAD_REQUEST, "Mismatch Type", details);
 
         return ResponseEntityBuilder.build(err);
     }

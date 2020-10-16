@@ -156,4 +156,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    @ExceptionHandler({Exception.class})
+    public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
+
+        List<String> details = new ArrayList<String>();
+        details.add(ex.getLocalizedMessage());
+
+        ApiError err = new ApiError(LocalDateTime.now(), HttpStatus.BAD_REQUEST, "Error occurred", details);
+
+        return ResponseEntityBuilder.build(err);
+
+    }
+
+
 }

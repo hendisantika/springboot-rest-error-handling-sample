@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Min;
@@ -41,6 +42,15 @@ public class UserController {
 
         User usr = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User with ID :" + id + " Not Found!"));
+
+        return ResponseEntity.ok().body(usr);
+    }
+
+    @GetMapping(value = "/user")
+    ResponseEntity<User> getByUsername(@RequestParam(required = true) String username) {
+
+        User usr = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException(username + " NOT Found!"));
 
         return ResponseEntity.ok().body(usr);
     }

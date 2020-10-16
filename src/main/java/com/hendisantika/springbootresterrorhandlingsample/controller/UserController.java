@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,5 +71,17 @@ public class UserController {
                 .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @PutMapping(value = "/users/{id}")
+    ResponseEntity<User> update(@PathVariable("id") @Min(1) int id, @Valid @RequestBody User user) {
+
+        User puser = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User with ID :" + id + " Not Found!"));
+
+        user.setId(puser.getId());
+        userRepository.save(user);
+        return ResponseEntity.ok().body(user);
+
     }
 }

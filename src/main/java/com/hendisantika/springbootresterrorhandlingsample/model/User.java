@@ -43,4 +43,9 @@ public class User implements Serializable {
 
     @NotEmpty
     private String password;
+
+    public User(@NotEmpty String username, @NotEmpty String password) {
+        this.username = username;
+        this.password = password;
+    }
 }

@@ -1,0 +1,164 @@
+{
+  "info": {
+    "_postman_id": "b67753cf-adf0-4fca-a84a-0c51c6a2cdc2",
+    "name": "Spring Boot REST Error Handling Sample",
+    "description": "Spring Boot REST Error Handling Sample",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users"
+          ]
+        },
+        "description": "Get All Users"
+      },
+      "response": []
+    },
+    {
+      "name": "Add New User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"hinata\",\n    \"password\": \"12345\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users"
+          ]
+        },
+        "description": "Add New User"
+      },
+      "response": []
+    },
+    {
+      "name": "Retrieve single User by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/users/6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users",
+            "6"
+          ]
+        },
+        "description": "Retrieve single User by ID"
+      },
+      "response": []
+    },
+    {
+      "name": "Update User details",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"kushina\",\n    \"password\": \"123456\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/users/6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users",
+            "6"
+          ]
+        },
+        "description": "Update User details"
+      },
+      "response": []
+    },
+    {
+      "name": "Get User by username",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/user?username=naruto",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "user"
+          ],
+          "query": [
+            {
+              "key": "username",
+              "value": "naruto"
+            }
+          ]
+        },
+        "description": "Get User by username"
+      },
+      "response": []
+    },
+    {
+      "name": "Delete User by ID",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/users/7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users",
+            "7"
+          ]
+        },
+        "description": "Delete User by ID"
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
